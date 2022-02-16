@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"log"
 	"net/http"
 
 	"github.com/gorilla/mux"
@@ -23,6 +24,12 @@ var public = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 })
 
 func main() {
+	const port = ":8080"
+
 	r := mux.NewRouter()
-	r.Handle("/public", nil)
+	r.Handle("/public", public)
+
+	if err := http.ListenAndServe(port, r); err != nil {
+		log.Fatal("ListenAndServe:", err)
+	}
 }
