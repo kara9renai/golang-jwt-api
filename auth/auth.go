@@ -26,7 +26,7 @@ var GetTokenHandler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Reque
 	claims["admin"] = true
 	claims["sub"] = "54546557354"
 	claims["name"] = "taro"
-	claims["iat"] = time.Now()
+	claims["iat"] = time.Now().Unix()
 	claims["exp"] = time.Now().Add(time.Hour * 24).Unix()
 
 	tokenString, _ := token.SignedString([]byte(os.Getenv("SIGNINGKEY")))
