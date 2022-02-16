@@ -7,6 +7,7 @@ import (
 
 	"gihub.com/kara9renai/golang-jwt-api/auth"
 	"github.com/gorilla/mux"
+	"github.com/joho/godotenv"
 )
 
 type post struct {
@@ -35,6 +36,11 @@ var private = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	const port = ":8080"
+
+	err := godotenv.Load(".env")
+	if err != nil {
+		log.Println("godotenv:", err)
+	}
 
 	r := mux.NewRouter()
 	r.Handle("/public", public)
